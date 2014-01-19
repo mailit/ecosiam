@@ -15,6 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/*
+Class filiere
+*/
+
 @Entity
 @Table(name = "Filiere")
 public class Filiere {
