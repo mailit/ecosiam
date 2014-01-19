@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<p:dialog id="modificationID"
+		message="#{filiereMB.filiere.libelleFiliere}" header="Modification"
+		modal="true" closable="true" draggable="false" resizable="false"
+		widgetVar="modification">
+		<h:form id="modificationForm" prependId="false">
+			<h:panelGrid columns="4">
+
+				<h:outputLabel for="libelleFilierem" value="libellé: *" />
+				<p:inputText id="libelleFilierem"
+					value="#{filiereMB.filiere.libelleFiliere}" required="true"
+					label="libelle Filiere" maxlength="20">
+					<f:validateRegex pattern="^[a-zA-Z]*[0-9]*"/>
+					<f:validateLength minimum="5" maximum="20" />
+				</p:inputText>
+				<p:watermark for="libelleFilierem" value="filiere" />
+				<p:message for="libelleFilierem" />
+				
+				<h:outputLabel for="dateCreationFilierem" value="Date de création: " />
+				<p:calendar effect="fadeIn" id="dateCreationFilierem"
+					pattern="dd/MM/yyyy"
+					value="#{filiereMB.filiere.dateCreationFiliere}"
+					label="Date de début" />
+				<p:watermark for="dateCreationFilierem" value="01/01/1991" />
+				<p:message for="dateCreationFilierem" />
+
+				<h:outputLabel for="prixFormationm" value="Prix: *" />
+				<p:inputText id="prixFormationm"
+					value="#{filiereMB.filiere.prixFormation}" required="true" >
+				<f:validateDoubleRange mimimum="2000.0" maximum="5000.0"/>
+				</p:inputText>
+				<p:watermark for="prixFormationm" value="XXXX.YY" />
+				<p:message for="prixFormationm" />
+				
+				<h:outputLabel for="formationm" value="Formation: *" />
+				<p:autoComplete id="formationm" dropdown="true"
+					value="#{filiereMB.formation}" converter="#{formationConverter}"
+					completeMethod="#{filiereMB.completeFormations}" var="formation"
+					itemLabel="#{formation.libelleFormation}" itemValue="#{formation}"
+					label="formation" required="true" />
+				<p:message for="formationm" />
+
+				
+
+			</h:panelGrid>
+			<p:commandButton id="updateBtn" value="Modifier" icon="ui-icon-check"
+				 style="margin:0" action="#{filiereMB.updateFiliere}" />
+			<br />
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

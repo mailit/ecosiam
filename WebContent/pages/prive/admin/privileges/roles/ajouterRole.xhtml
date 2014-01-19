@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<p:dialog id="ajoutID" header="Ajout" modal="true" closable="true"
+		draggable="false" resizable="false" widgetVar="ajout">
+		<h:form id="ajoutForm" prependId="false">
+			<h:panelGrid columns="4">
+
+				<h:outputLabel for="nomRole" value="Libellé: *" />
+				<p:inputText id="nomRole" value="#{roleMB.role.role}"
+					required="true" maxlength="20" label="libelle Role" />
+				<p:watermark for="nomRole" value="libellé" />
+				<p:message for="nomRole" />
+
+				<h:outputLabel for="description" value="Description: *" />
+				<p:inputText id="description" value="#{roleMB.role.description}"
+					required="true" label="description Role" validatorMessage="Description invalide"  >
+				<f:validateRegex pattern="^[a-z]*[A-Z]*[0-9]*$"/>
+				</p:inputText>
+				<p:watermark for="description" value="description" />
+				<p:message for="description" />
+
+
+			</h:panelGrid>
+			<p:commandButton id="saveBtn" value="Ajouter" icon="ui-icon-check"
+				style="margin:0" action="#{roleMB.createRole}" />
+			<br />
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

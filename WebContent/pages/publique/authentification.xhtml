@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Authentification</title>
+	<h:outputStylesheet  name="css/animate.css" />
+	<h:outputStylesheet name="css/styles.css" />
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+
+	<div id="container">
+		<h:form>
+			<p:growl id="growl" showDetail="true" life="3000" />
+			<h:outputLabel for="nomUtilisateur" value="Nom d'utilisateur :" />
+			<p:inputText value="#{authentificationMB.loginUser}"
+				id="nomUtilisateur" required="true" label="nom d'utilisateur" />
+
+			<h:outputLabel for="motDePasse" value="Mot de Passe :" />
+			<h:inputSecret value="#{authentificationMB.passwordUser}"
+				id="motDePasse" required="true" label="mot de passe" />
+			<div id="lower">
+				<p:commandButton id="loginButton" value="Se connecter"
+					actionListener="#{authentificationMB.seConnecter}" ajax="false" />
+			</div>
+		</h:form>
+	</div>
+
+</h:body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<p:dialog id="modificationID" message="#{roleMB.role.libelleRole}"
+		header="Modification" modal="true" closable="true" draggable="false"
+		resizable="false" widgetVar="modification">
+		<h:form id="modificationForm" prependId="false">
+			<h:panelGrid columns="4">
+
+				<h:outputLabel for="nomRolem" value="Libellé: *" />
+				<p:inputText id="nomRolem" value="#{roleMB.role.role}"
+					required="true" maxlength="20" label="libelle du role" />
+				<p:watermark for="nomRolem" value="libellé" />
+				<p:message for="nomRolem" />
+
+				<h:outputLabel for="descriptionm" value="Description: *" />
+				<p:inputText id="descriptionm" value="#{roleMB.role.description}"
+					required="true" label="description du role" 
+					validatorMessage="Description invalide"  >
+				<f:validateRegex pattern="^[a-z]*[A-Z]*[0-9]*$"/>
+				</p:inputText>
+				<p:watermark for="descriptionm" value="description" />
+				<p:message for="descriptionm" />
+
+				<p:commandButton id="updateBtn" value="Modifier"
+					icon="ui-icon-check" style="margin:0" action="#{roleMB.updateRole}" />
+				<br />
+				</h:panelGrid>
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<p:dialog id="modificationID"
+		message="#{specialiteMB.specialite.libelleSpecialite}"
+		header="Modification" modal="true" closable="true" draggable="false"
+		resizable="false" widgetVar="modification">
+		<h:form id="modificationForm" prependId="false">
+			<h:panelGrid columns="3">
+
+				<h:outputLabel for="libelleSpecialitem" value="Libellé : *" />
+				<p:inputText id="libelleSpecialitem"
+					value="#{specialiteMB.specialite.libelleSpecialite}"
+					required="true" label="libelle Specialite">
+					<f:validateRegex pattern="^[a-zA-Z]*$"/>
+					<f:validateLength minimum="3" maximum="20"/>
+				</p:inputText>
+				<p:watermark for="libelleSpecialitem" value="specialité" />
+
+				<p:message for="libelleSpecialitem" />
+
+			</h:panelGrid>
+
+			<p:commandButton id="updateBtn" value="Modifier" icon="ui-icon-check"
+				style="margin:0" action="#{specialiteMB.updateSpecialite}" />
+			<br />
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

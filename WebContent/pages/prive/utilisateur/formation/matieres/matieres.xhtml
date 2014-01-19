@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+
+	<ui:insert name="header">
+		<ui:include src="/resources/includes/header.xhtml" />
+	</ui:insert>
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="80"
+			header="Application de Gestion de l'ECOSIAM" resizable="true"
+			closable="true" collapsible="true">
+			<ui:insert name="menu">
+				<ui:include src="/resources/includes/menu.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west" size="207" resizable="true"
+			closable="true" collapsible="true" header="Formations">
+			<ui:insert name="left_box">
+				<ui:include src="/resources/includes/left_box_formations.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+		<p:layoutUnit position="south" size="30" style="border:0px"
+			header="ECOSIAM - Tous droits réservés" resizable="true"
+			closable="true" collapsible="true">
+			<ui:insert name="footer">
+				<ui:include src="/resources/includes/footer.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+
+		<p:layoutUnit position="center">
+			<p:panel id="pnl" header="Liste des matieres"
+				style="margin-bottom:10px;border:0px">
+
+				<h:form id="form" style="width:60%;margin-top:2%;margin-left:20%">
+					<p:dataTable id="tableMatiere" var="s"
+						value="#{matiereMB.matieres}" paginator="true" rows="10"
+						filteredValue="#{matiereMB.matieresFiltres}"
+						emptyMessage="Aucun enregistrement trouvé ayant ce critère"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">
+
+						<p:column headerText="libelle" style="width:20%"
+							sortBy="#{s.libelleMatiere}" filterBy="#{s.libelleMatiere}"
+							filterMatchMode="contains">
+							<h:outputText value="#{s.libelleMatiere}" />
+						</p:column>
+
+						<p:column headerText="Coefficient" style="width:20%"
+							sortBy="#{s.coeffMatiere}" filterBy="#{s.coeffMatiere}"
+							filterMatchMode="contains">
+							<h:outputText value="#{s.coeffMatiere}" />
+						</p:column>
+						
+						<p:column headerText="Formateur" style="width:20%"
+							sortBy="#{s.formateur.utilisateur.nomUser}" filterBy="#{s.formateur.utilisateur.nomUser}"
+							filterMatchMode="contains">
+							<h:outputText value="#{s.formateur.utilisateur.nomUser}" />
+						</p:column>
+
+						<p:column  style="width:20%" headerText="Actions">
+							<p:spacer width="10px" />
+							<p:commandButton icon="ui-icon-pencil"
+								onclick="modification.show();" update=":modificationForm"
+								title="Icon Only">
+								<f:setPropertyActionListener target="#{matiereMB.matiere}"
+									value="#{s}" />
+							</p:commandButton>
+
+							<p:spacer width="10px" />
+							<p:commandButton icon="ui-icon-trash"
+								onclick="suppression.show();" title="Icon Only">
+								<f:setPropertyActionListener value="#{s}"
+									target="#{matiereMB.matiere}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+					<br />
+					<p:commandButton icon="ui-icon-check" onclick="ajout.show();" 
+						update=":ajoutForm" value="Ajouter une matiere">
+					</p:commandButton>
+				</h:form>
+			</p:panel>
+		</p:layoutUnit>
+	</p:layout>
+
+	<ui:include src="ajouterMatiere.xhtml" />
+	<ui:include src="supprimerMatiere.xhtml" />
+	<ui:include src="modifierMatiere.xhtml" />
+
+</h:body>
+</html>

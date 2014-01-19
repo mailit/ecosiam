@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+
+	<ui:insert name="header">
+		<ui:include src="/resources/includes/header.xhtml" />
+	</ui:insert>
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="80"
+			header="Application de Gestion de l'ECOSIAM" resizable="true"
+			closable="true" collapsible="true">
+			<ui:insert name="menu">
+				<ui:include src="/resources/includes/menu.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west" size="207" resizable="true"
+			closable="true" collapsible="true" header="Profil">
+			<ui:insert name="left_box">
+				<ui:include src="/resources/includes/left_box_profil.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+		<p:layoutUnit position="south" size="30" style="border:0px"
+			header="ECOSIAM - Tous droits réservés" resizable="true"
+			closable="true" collapsible="true">
+			<ui:insert name="footer">
+				<ui:include src="/resources/includes/footer.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+
+		<p:layoutUnit position="center">
+			<p:panel id="pnl" header="Mot de passe" style="margin-bottom:10px;">
+				<h:form id="form"
+					style="width:60%;margin-top:2%;margin-left:20%;margin-right:20%">
+					<h:panelGrid columns="3" cellpadding="10">
+						<h:outputLabel for="ancienMotDePasse"
+							value="Ancien mot de passe: *" />
+						<p:password id="ancienMotDePasse" value="#{utilisateurMB.pass}"
+							required="true" label="Ancien mot de passe" />
+						<p:message for="ancienMotDePasse" />
+
+						<h:outputLabel for="nouveauMotDePasse"
+							value="Nouveau mot de passe: *" />
+						<p:password id="nouveauMotDePasse"
+							value="#{utilisateurMB.utilisateur.passwordUser}" required="true"
+							feedback="true" label="Nouveau mot de passe"
+							match="confirmMotDePasse" />
+						<p:message for="nouveauMotDePasse" />
+
+
+						<h:outputLabel for="confirmMotDePasse"
+							value="Confirmez mot de passe: *" />
+						<p:password id="confirmMotDePasse" required="true"
+							label="Confirmez mot de passe :" />
+						<p:message for="confirmMotDePasse" />
+
+						<p:commandButton id="saveBtn" value="Modifier !"
+							icon="ui-icon-check" style="margin:0"
+							action="#{utilisateurMB.modifierPass()}">
+							<f:param name="loginUser" value="#{utilisateur.loginUser}" />
+						</p:commandButton>
+					</h:panelGrid>
+				</h:form>
+			</p:panel>
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

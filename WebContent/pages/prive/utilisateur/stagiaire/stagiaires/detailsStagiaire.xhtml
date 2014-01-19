@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<p:dialog header="Fiche du stagiaire" resizable="false"
+		showEffect="explode" hideEffect="explode" widgetVar="details">
+		<h:form id="detailsForm" prependId="false">
+			<h:panelGrid columns="2">
+				<h:outputText value="Nom:" />
+				<h:outputText value="#{stagiaireMB.stagiaire.utilisateur.nomUser}" />
+				<h:outputText value="Prenom" />
+				<h:outputText
+					value="#{stagiaireMB.stagiaire.utilisateur.prenomUser}" />
+				<h:outputText value="Email:" />
+				<h:outputText value="#{stagiaireMB.stagiaire.utilisateur.emailUser}" />
+				<h:outputText value="Tel:" />
+				<h:outputText value="#{stagiaireMB.stagiaire.utilisateur.telUser}" />
+				<h:outputText value="Date de naissance:" />
+				<h:outputText
+					value="#{stagiaireMB.stagiaire.dateNaissance}" >
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+					<h:outputText value="Date d'inscription:" />
+				<h:outputText
+					value="#{stagiaireMB.stagiaire.dateInscription}" >
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				<h:outputText value="Formation:" />
+				<h:outputText value="#{stagiaireMB.stagiaire.classe.filiere.formation.libelleFormation}" />
+				<h:outputText value="Filière:" />
+				<h:outputText value="#{stagiaireMB.stagiaire.classe.filiere.libelleFiliere}" />
+				<h:outputText value="Classe:" />
+				<h:outputText value="#{stagiaireMB.stagiaire.classe.libelleClasse}" />
+				
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

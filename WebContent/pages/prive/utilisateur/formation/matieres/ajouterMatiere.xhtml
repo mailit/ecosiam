@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<p:dialog id="ajoutID" header="Ajout" modal="true" closable="true"
+		draggable="false" resizable="false" widgetVar="ajout">
+		<h:form id="ajoutForm" prependId="false">
+			<h:panelGrid columns="4">
+
+
+				<h:outputLabel for="libelleMatiere" value="libellé matière: *" />
+				<p:inputText id="libelleMatiere"
+					value="#{matiereMB.matiere.libelleMatiere}" required="true" maxlength="20"
+					label="libelle Matiere" />
+				<p:watermark for="libelleMatiere" value="matière" />
+				<p:message for="libelleMatiere" />
+
+				<h:outputLabel for="coefficient" value="Coefficient: *" />
+				<p:inputText id="coefficient"
+					value="#{matiereMB.matiere.coeffMatiere}" required="true"
+					label="coefficient">
+					<f:validateDoubleRange minimum="1.0" maximum="10.0" />
+				</p:inputText>
+				<p:watermark for="coefficient" value="2" />
+				<p:message for="coefficient" />
+
+				<h:outputLabel for="formateur" value="Formateur: *" />
+				<p:autoComplete id="formateur" dropdown="true"
+					value="#{matiereMB.formateur}" converter="#{converterformateur}"
+					completeMethod="#{matiereMB.completeFormateurs}" var="formateur"
+					itemLabel="#{formateur.utilisateur.nomUser}"
+					itemValue="#{formateur}" label="formateur" required="true" />
+				<p:message for="formateur" />
+
+			</h:panelGrid>
+			<p:commandButton id="saveBtn" value="Ajouter" icon="ui-icon-check"
+				style="margin:0" action="#{matiereMB.createMatiere}" />
+			<br />
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

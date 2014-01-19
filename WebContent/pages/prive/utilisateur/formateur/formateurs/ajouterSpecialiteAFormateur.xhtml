@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<p:dialog id="ajoutSpecialiteID" header="Ajout" modal="true" closable="true"
+		draggable="false" resizable="false" widgetVar="ajoutSpecialite">
+		<h:form id="ajoutSpecialiteForm" prependId="false">
+			<h:panelGrid columns="3">
+
+				<h:outputLabel for="specialite" value="Specialite: *" />
+				<p:autoComplete id="specialite" dropdown="true"
+					value="#{formateurMB.specialite}" converter="#{specialiteConverter}"
+					completeMethod="#{formateurMB.completeSpecialites}" var="specialite"
+					itemLabel="#{specialite.libelleSpecialite}" itemValue="#{specialite}"
+					label="specialite" required="true" />
+				<p:message for="specialite" />
+
+			</h:panelGrid>
+			<p:commandButton id="saveMatiereBtn" value="Ajouter"
+				icon="ui-icon-check" ajax="false" style="margin:0"
+				action="#{formateurMB.ajouterSpecialite}" />
+			<br />
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

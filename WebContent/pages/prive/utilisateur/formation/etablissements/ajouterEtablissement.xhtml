@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<p:dialog id="ajoutID" header="Ajout" modal="true" closable="true"
+		draggable="false" resizable="false" widgetVar="ajout">
+		<h:form id="ajoutForm" prependId="false">
+			<h:panelGrid columns="4">
+
+				<h:outputLabel for="libelleEtablissement" value="Libellé: *" />
+				<p:inputText id="libelleEtablissement"
+					value="#{etablissementMB.etablissement.libelleEtablissement}"
+					required="true" label="libelle Etablissement" 
+					validatorMessage="Le libelle est invalide">
+					<f:validateRegex pattern="^[a-z]*[A-Z]*[0-9]*$"/>
+					<f:validateLength  maximum="20" />
+				</p:inputText>
+				<p:watermark for="libelleEtablissement"
+					value="etablissement" />
+				<p:message for="libelleEtablissement" />
+
+				<h:outputLabel for="emailEtablissement" value="Email: *" />
+				<p:inputText id="emailEtablissement"
+					value="#{etablissementMB.etablissement.emailEtablissement}"
+					required="true" validatorMessage="l'adresse mail est invalide" label="Email d'établissement" >
+					<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Zaz0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+				</p:inputText>
+				<p:watermark for="emailEtablissement"
+					value="exemple@exemple.com" />
+
+				<p:message for="emailEtablissement" />
+
+				<h:outputLabel for="telEtablissement" value="Tel: *" />
+				<p:inputText id="telEtablissement"
+					value="#{etablissementMB.etablissement.telEtablissement}"
+					required="true"  validatorMessage="le numéro de telephone est invalide" 
+					label="Tel de l'établissement" >
+					<f:validateRegex pattern="^\+[0-9]*$"/>
+					<f:validateLength minimum="13" maximum="13" />
+				</p:inputText>
+				<p:watermark for="telEtablissement"
+					value="+212XXXXXXX" />
+				<p:message for="telEtablissement" />
+
+				<h:outputLabel for="numAutorisation" value="N° d'autorisation: *" />
+				<p:inputText id="numAutorisation"
+					value="#{etablissementMB.etablissement.numAutorisation}"
+					required="true" validatorMessage="numero d'autorisation invalide" label="N° d'autorisation" >
+					<f:validateRegex pattern="^[0-9]*$"/>
+				</p:inputText>
+				<p:watermark for="numAutorisation"
+					value="12345" />
+
+				<p:message for="numAutorisation" />
+
+				<h:outputLabel for="dateAutorisation" value="Date d'autorisation: " />
+				<p:calendar effect="fadeIn" id="dateAutorisation"
+					pattern="dd/MM/yyyy"
+					value="#{etablissementMB.etablissement.dateAutorisation}"
+					label="Date d'autorisation" />
+				<p:watermark for="dateAutorisation"
+					value="01/01/1991" />
+				<p:message for="dateAutorisation" />
+
+
+
+				<h:outputLabel for="ville" value="Ville: *" />
+				<p:autoComplete id="ville" dropdown="true"
+					value="#{etablissementMB.ville}" converter="#{converterville}"
+					completeMethod="#{etablissementMB.completeVilles}" var="ville"
+					itemLabel="#{ville.nomVille}" itemValue="#{ville}" label="ville"
+					required="true" />
+				<p:message for="ville" />
+
+			</h:panelGrid>
+			<p:commandButton id="saveBtn" value="Ajouter" icon="ui-icon-check"
+				style="margin:0" action="#{etablissementMB.createEtablissement}" />
+			<br />
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<p:dialog id="ajoutID" header="Ajout" modal="true" closable="true"
+		draggable="false" resizable="false" widgetVar="ajout">
+		<h:form id="ajoutForm" prependId="false">
+			<h:panelGrid columns="4">
+
+				<h:outputLabel for="nomVille" value="libellé du ville: *" />
+				<p:inputText id="nomVille" value="#{villeMB.ville.nomVille}"
+					required="true"  label="libelle Ville" 
+					validatorMessage="Le nom de la ville est invalide">
+					<f:validateRegex pattern="^[a-z]*[A-Z]*$"/>
+					<f:validateLength minimum="4" maximum="20" />
+				</p:inputText>
+				<p:watermark for="nomVille" value="ville" />
+				<p:message for="nomVille" />
+
+			</h:panelGrid>
+			<p:commandButton id="saveBtn" value="Ajouter" icon="ui-icon-check"
+				style="margin:0" action="#{villeMB.createVille}" />
+			<br />
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

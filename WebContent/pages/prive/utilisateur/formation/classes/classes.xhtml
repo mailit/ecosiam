@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+
+	<ui:insert name="header">
+		<ui:include src="/resources/includes/header.xhtml" />
+	</ui:insert>
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="80"
+			header="Application de Gestion de l'ECOSIAM" resizable="true"
+			closable="true" collapsible="true">
+			<ui:insert name="menu">
+				<ui:include src="/resources/includes/menu.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west" size="207" resizable="true" 
+			closable="true" collapsible="true" header="Formations">
+			<ui:insert name="left_box">
+				<ui:include src="/resources/includes/left_box_formations.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+		<p:layoutUnit position="south" size="30" style="border:0px"
+			header="ECOSIAM - Tous droits réservés" resizable="true"
+			closable="true" collapsible="true">
+			<ui:insert name="footer">
+				<ui:include src="/resources/includes/footer.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+
+		<p:layoutUnit position="center" >
+			<p:panel id="pnl" header="Liste des classes"
+				style="margin-bottom:10px;border:0px">
+
+				<h:form id="form" style="width:60%;margin-top:2%;margin-left:20%">
+					<p:dataTable id="tableClasse" var="s" value="#{classeMB.classes}"
+						paginator="true" rows="10"
+						filteredValue="#{classeMB.classesFiltres}"
+						emptyMessage="Aucun enregistrement trouvé ayant ce critère"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">
+
+
+						<p:column headerText="Libelle" style="width:20%"
+							sortBy="#{s.libelleClasse}" filterBy="#{s.libelleClasse}"
+							filterMatchMode="contains">
+							<h:outputText value="#{s.libelleClasse}" />
+						</p:column>
+						<p:column headerText="Filiere" style="width:20%"
+							sortBy="#{s.filiere.libelleFiliere}"
+							filterBy="#{s.filiere.libelleFiliere}" filterMatchMode="contains">
+							<h:outputText value="#{s.filiere.libelleFiliere}" />
+						</p:column>
+
+
+						<p:column style="width:20%">
+							<p:spacer width="10px" />
+							<p:commandButton icon="ui-icon-pencil"
+								onclick="modification.show();" update=":modificationForm"
+								title="Icon Only">
+								<f:setPropertyActionListener target="#{classeMB.classe}"
+									value="#{s}" />
+							</p:commandButton>
+
+							<p:spacer width="10px" />
+							<p:commandButton icon="ui-icon-trash"
+								onclick="suppression.show();" title="Icon Only">
+								<f:setPropertyActionListener value="#{s}"
+									target="#{classeMB.classe}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+					<br />
+					<p:commandButton icon="ui-icon-check" onclick="ajout.show();"
+					update=":ajoutForm" value="Ajouter une classe">
+					</p:commandButton>
+				</h:form>
+			</p:panel>
+		</p:layoutUnit>
+	</p:layout>
+
+	<ui:include src="ajouterClasse.xhtml" />
+	<ui:include src="supprimerClasse.xhtml" />
+	<ui:include src="modifierClasse.xhtml" />
+
+</h:body>
+</html>

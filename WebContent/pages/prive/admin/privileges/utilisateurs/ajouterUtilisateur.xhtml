@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<p:dialog id="ajoutID"
+		message="#{utilisateurMB.salle.libelleUtilisateur}" header="Ajout"
+		modal="true" closable="true" draggable="false" resizable="false"
+		widgetVar="ajout">
+		<h:form id="ajoutForm" prependId="false">
+			<p:messages id="messages" />
+			<h:panelGrid columns="4">
+					<h:outputLabel for="prenomUser" value="Prénom: *" />
+				<p:inputText id="prenomUser"
+					value="#{utilisateurMB.utilisateur.prenomUser}" required="true"
+					label="prenom" maxlength="20" validatorMessage="Prenom invalide"  >
+				<f:validateRegex pattern="^[a-z]*[A-Z]*$"/>
+				</p:inputText>
+				<p:watermark for="prenomUser" value="prénom" />
+				<p:message for="prenomUser" />
+
+				<h:outputLabel for="nomUser" value="Nom: *" />
+				<p:inputText id="nomUser" value="#{utilisateurMB.utilisateur.nomUser}"
+					required="true" label="nom" maxlength="20" validatorMessage="Nom invalide"  >
+				<f:validateRegex pattern="^[a-z]*[A-Z]*$"/>
+				</p:inputText>
+				<p:watermark for="nomUser" value="nom" />
+				<p:message for="nomUser" />
+
+				<h:outputLabel for="emailUser" value="Email: *" />
+				<p:inputText id="emailUser"
+					value="#{utilisateurMB.utilisateur.emailUser}" required="true"
+					label="email" validatorMessage="L'adresse mail est invalide">
+					<f:validateRegex pattern="^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$"/>
+				</p:inputText>
+				<p:watermark for="emailUser" value="exemple@exemple.com" />
+				<p:message for="emailUser" />
+
+				<h:outputLabel for="loginUser" value="Login: *" />
+				<p:inputText id="loginUser"
+					value="#{utilisateurMB.utilisateur.loginUser}" required="true"
+					label="login" />
+				<p:watermark for="loginUser" value="login" />
+				<p:message for="loginUser" />
+
+				<h:outputLabel for="passwordUser" value="Mot de passe: *" />
+				<p:password id="passwordUser"
+					value="#{utilisateurMB.utilisateur.passwordUser}" required="true"
+					label="mot de passe" />
+				<p:watermark for="passwordUser" value="password" />
+				<p:message for="passwordUser" />
+
+				<h:outputLabel for="telUser" value="Tel: *" />
+				<p:inputText id="telUser" value="#{utilisateurMB.utilisateur.telUser}"
+					required="true" label="telephone" validatorMessage="Le numéro de telephone est invalide">
+					<f:validateRegex pattern="\+[0-9]*$"/>
+				</p:inputText>
+				<p:watermark for="telUser" value="+212XXXXXXXXX" />
+				<p:message for="telUser" />
+
+	
+
+			<h:outputLabel for="role" value="Role *" />
+				<p:autoComplete id="role" dropdown="true"
+					value="#{utilisateurMB.utilisateur.role}" converter="#{converterrole}"
+					completeMethod="#{utilisateurMB.completeRoles}" var="role"
+					itemLabel="#{role.role}" itemValue="#{role}" label="role"
+					required="true" />
+				<p:message for="role" />
+
+			</h:panelGrid>
+			<p:commandButton id="saveBtn" value="Ajouter !" icon="ui-icon-check"
+				style="margin:0" action="#{utilisateurMB.createUtilisateur}" />
+			<br />
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

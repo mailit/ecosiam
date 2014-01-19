@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+
+	<ui:insert name="header">
+		<ui:include src="/resources/includes/header.xhtml" />
+	</ui:insert>
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="80"
+			header="Application de Gestion de l'ECOSIAM" resizable="true"
+			closable="true" collapsible="true">
+			<ui:insert name="menu">
+				<ui:include src="/resources/includes/menu.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west" size="207" resizable="true"
+			closable="true" collapsible="true" header="Formations">
+			<ui:insert name="left_box">
+				<ui:include src="/resources/includes/left_box_formations.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+		<p:layoutUnit position="south" size="30" style="border:0px"
+			header="ECOSIAM - Tous droits réservés" resizable="true"
+			closable="true" collapsible="true">
+			<ui:insert name="footer">
+				<ui:include src="/resources/includes/footer.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+
+		<p:layoutUnit position="center">
+			<p:panel id="pnl" header="Liste des filieres"
+				style="margin-bottom:10px;border:0px">
+
+				<h:form id="form" style="width:80%;margin-top:2%;margin-left:10%">
+					<p:dataTable id="tableFiliere" var="s"
+						value="#{filiereMB.filieres}" paginator="true" rows="10"
+						filteredValue="#{filiereMB.filieresFiltres}"
+						emptyMessage="Aucun enregistrement trouvé ayant ce critère"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">
+						<p:column style="width:2%">
+							<p:rowToggler />
+						</p:column>
+						<p:column headerText="Libelle" style="width:10%"
+							sortBy="#{s.libelleFiliere}" filterBy="#{s.libelleFiliere}"
+							filterMatchMode="contains">
+							<h:outputText value="#{s.libelleFiliere}" />
+						</p:column>
+
+						<p:column headerText="Formation" style="width:10%"
+							sortBy="#{s.formation.libelleFormation}"
+							filterBy="#{s.formation.libelleFormation}"
+							filterMatchMode="contains">
+							<h:outputText value="#{s.formation.libelleFormation}" />
+						</p:column>
+
+
+						<p:column headerText="Prix" style="width:10%"
+							sortBy="#{s.prixFormation}" filterBy="#{s.prixFormation}"
+							filterMatchMode="contains">
+							<h:outputText value="#{s.prixFormation}" />
+						</p:column>
+						<p:column headerText="Date de création" style="width:10%"
+							sortBy="#{s.dateCreationFiliere}"
+							filterBy="#{s.dateCreationFiliere}" filterMatchMode="contains">
+							<h:outputText value="#{s.dateCreationFiliere}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+
+
+						<p:column style="width:50%">
+							<p:spacer width="10px" />
+							<p:commandButton icon="ui-icon-pencil"
+								onclick="modification.show();" update=":modificationForm"
+								title="Icon Only">
+								<f:setPropertyActionListener target="#{filiereMB.filiere}"
+									value="#{s}" />
+							</p:commandButton>
+
+
+							<p:spacer width="10px" />
+							<p:commandButton icon="ui-icon-trash"
+								onclick="suppression.show();" title="Icon Only">
+								<f:setPropertyActionListener value="#{s}"
+									target="#{filiereMB.filiere}" />
+							</p:commandButton>
+
+							<p:spacer width="10px" />
+							<p:commandButton value="ajouter une matiere"
+								onclick="ajoutMatiere.show();" title="Icon Only">
+								<f:setPropertyActionListener value="#{s}"
+									target="#{filiereMB.filiere}" />
+							</p:commandButton>
+						</p:column>
+
+						<p:rowExpansion>
+							<p:panel id="display" style="border:0px">
+
+								<p:dataList value="#{s.matieres}" var="m" itemType="disc"
+									style="border:0px">  
+						    #{m.libelleMatiere}  
+								</p:dataList>
+							</p:panel>
+								<p:panel id="displayy" style="border:0px">
+
+								<p:dataList value="#{s.classes}" var="c" itemType="disc"
+									style="border:0px">  
+						    #{c.libelleClasse}  
+								</p:dataList>
+							</p:panel>
+
+						</p:rowExpansion>
+					</p:dataTable>
+					<br />
+					<p:commandButton icon="ui-icon-check" onclick="ajout.show();"
+						update=":ajoutForm" value="Ajouter une filiere">
+					</p:commandButton>
+				</h:form>
+			</p:panel>
+		</p:layoutUnit>
+	</p:layout>
+
+	<ui:include src="ajouterFiliere.xhtml" />
+	<ui:include src="ajouterMatiereAFiliere.xhtml" />
+	<ui:include src="supprimerFiliere.xhtml" />
+	<ui:include src="modifierFiliere.xhtml" />
+
+</h:body>
+</html>

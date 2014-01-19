@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+
+	<ui:insert name="header">
+		<ui:include src="/resources/includes/header.xhtml" />
+	</ui:insert>
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="80"
+			header="Application de Gestion de l'ECOSIAM" resizable="true"
+			closable="true" collapsible="true">
+			<ui:insert name="menu">
+				<ui:include src="/resources/includes/menu.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west" size="200" resizable="true"
+			closable="true" collapsible="true" header="Formations">
+			<ui:insert name="left_box">
+				<ui:include src="/resources/includes/left_box_formations.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+		<p:layoutUnit position="south" size="30" style="border:0px"
+			header="ECOSIAM - Tous droits réservés" resizable="true"
+			closable="true" collapsible="true">
+			<ui:insert name="footer">
+				<ui:include src="/resources/includes/footer.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+
+		<p:layoutUnit position="center">
+			<p:panel id="pnl" header="Liste des villes"
+				style="margin-bottom:10px;border:0px">
+
+				<h:form id="form" style="width:40%;margin-top:2%;margin-left:30%">
+					<p:dataTable id="tableVille" var="s" value="#{villeMB.villes}"
+						paginator="true" rows="10"
+						filteredValue="#{villeMB.villesFiltres}"
+						emptyMessage="Aucun enregistrement trouvé ayant ce critère"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">
+						
+						<p:column headerText="Nom" style="width:60%" sortBy="#{s.nomVille}"
+							filterBy="#{s.nomVille}" filterMatchMode="contains">
+							<h:outputText value="#{s.nomVille}" />
+						</p:column>
+
+									
+						<p:column style="width:20%">
+							<p:spacer width="10px" />
+							<p:commandButton icon="ui-icon-pencil"
+								onclick="modification.show();" update=":modificationForm"
+								title="Icon Only">
+								<f:setPropertyActionListener target="#{villeMB.ville}"
+									value="#{s}" />
+							</p:commandButton>
+
+							<p:spacer width="10px" />
+							<p:commandButton icon="ui-icon-trash"
+								onclick="suppression.show();" title="Icon Only">
+								<f:setPropertyActionListener value="#{s}"
+									target="#{villeMB.ville}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+					<br />
+					<p:commandButton icon="ui-icon-check" onclick="ajout.show();"
+						update=":ajoutForm" value="Ajouter une ville">
+					</p:commandButton>
+				</h:form>
+			</p:panel>
+		</p:layoutUnit>
+	</p:layout>
+
+	<ui:include src="ajouterVille.xhtml" />
+	<ui:include src="supprimerVille.xhtml" />
+	<ui:include src="modifierVille.xhtml" />
+
+</h:body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+
+	<ui:insert name="header">
+		<ui:include src="/resources/includes/header.xhtml" />
+	</ui:insert>
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="80"
+			header="Application de Gestion de l'ECOSIAM" resizable="true"
+			closable="true" collapsible="true">
+			<ui:insert name="menu">
+				<ui:include src="/resources/includes/menu.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west" size="207" resizable="true"
+			closable="true" collapsible="true" header="Formations">
+			<ui:insert name="left_box">
+				<ui:include src="/resources/includes/left_box_formations.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+		<p:layoutUnit position="south" size="30" style="border:0px"
+			header="ECOSIAM - Tous droits réservés" resizable="true"
+			closable="true" collapsible="true">
+			<ui:insert name="footer">
+				<ui:include src="/resources/includes/footer.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+
+		<p:layoutUnit position="center">
+			<p:panel id="pnl" header="Liste des etablissements"
+				style="margin-bottom:10px;border:0px">
+
+				<h:form id="form" style="width:90%;margin-top:2%;margin-left:5%">
+					<p:dataTable id="tableEtablissement" var="s"
+						value="#{etablissementMB.etablissements}" paginator="true"
+						rows="10" filteredValue="#{etablissementMB.etablissementsFiltres}"
+						emptyMessage="Aucun enregistrement trouvé ayant ce critère"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">
+
+						<p:column headerText="Libelle" style="width:10%"
+							sortBy="#{s.libelleEtablissement}"
+							filterBy="#{s.libelleEtablissement}" filterMatchMode="contains">
+							<h:outputText value="#{s.libelleEtablissement}" />
+						</p:column>
+
+						<p:column headerText="Email" style="width:10%"
+							sortBy="#{s.emailEtablissement}" filterBy="#{s.emailEtablissement}"
+							filterMatchMode="contains">
+							<h:outputText value="#{s.emailEtablissement}" />
+						</p:column>
+						
+					
+						
+						<p:column headerText="Numero d'autorisation" style="width:10%"
+							sortBy="#{s.numAutorisation}" filterBy="#{s.numAutorisation}"
+							filterMatchMode="contains">
+							<h:outputText value="#{s.numAutorisation}" />
+						</p:column>
+						
+						<p:column headerText="Ville" style="width:10%"
+							sortBy="#{s.ville.nomVille}" filterBy="#{s.ville.nomVille}"
+							filterMatchMode="contains">
+							<h:outputText value="#{s.ville.nomVille}" />
+						</p:column>
+						
+						<p:column headerText="Telephone" style="width:10%"
+							sortBy="#{s.telEtablissement}" filterBy="#{s.telEtablissement}"
+							filterMatchMode="contains">
+							<h:outputText value="#{s.telEtablissement}" />
+						</p:column>
+						<p:column headerText="Date d'autotisation" style="width:10%"
+							sortBy="#{s.dateAutorisation}"
+							filterBy="#{s.dateAutorisation}" filterMatchMode="contains">
+							<h:outputText value="#{s.dateAutorisation}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+
+						<p:column style="width:20%">
+							<p:spacer width="10px" />
+							<p:commandButton icon="ui-icon-pencil"
+								onclick="modification.show();" update=":modificationForm"
+								title="Icon Only">
+								<f:setPropertyActionListener
+									target="#{etablissementMB.etablissement}" value="#{s}" />
+							</p:commandButton>
+
+							<p:spacer width="10px" />
+							<p:commandButton icon="ui-icon-trash"
+								onclick="suppression.show();" title="Icon Only">
+								<f:setPropertyActionListener value="#{s}"
+									target="#{etablissementMB.etablissement}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+					<br />
+					<p:commandButton icon="ui-icon-check" onclick="ajout.show();"
+						update=":ajoutForm" value="Ajouter un etablissement">
+					</p:commandButton>
+				</h:form>
+			</p:panel>
+		</p:layoutUnit>
+	</p:layout>
+
+	<ui:include src="ajouterEtablissement.xhtml" />
+	<ui:include src="supprimerEtablissement.xhtml" />
+	<ui:include src="modifierEtablissement.xhtml" />
+
+</h:body>
+</html>

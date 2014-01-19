@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<p:dialog id="ajoutID" header="Ajout" modal="true" closable="true"
+		draggable="false" resizable="false" widgetVar="ajout">
+		<h:form id="ajoutForm" prependId="false">
+			<h:panelGrid columns="4">
+				<h:outputLabel for="libelleClasse" value="Libellé: *" />
+				<p:inputText id="libelleClasse"
+					value="#{classeMB.classe.libelleClasse}" required="true"
+					label="libelle Classe" maxlength="20">
+					<f:validateLength minimum="1" maximum="20" />
+					<f:validateRegex pattern="^[a-zA-Z]*"/>
+				</p:inputText>
+				<p:watermark for="libelleClasse" value="classe" />
+				<p:message for="libelleClasse" />
+
+				<h:outputLabel for="filiere" value="Filière: *" />
+				<p:autoComplete id="filiere" dropdown="true"
+					value="#{classeMB.filiere}" converter="#{filiereConverter}"
+					completeMethod="#{classeMB.completeFilieres}" var="filiere"
+					itemLabel="#{filiere.libelleFiliere}" itemValue="#{filiere}"
+					label="Filiere" required="true" />
+				<p:message for="filiere" />
+
+			</h:panelGrid>
+			<p:commandButton id="saveBtn" value="Ajouter" icon="ui-icon-check"
+				style="margin:0" action="#{classeMB.createClasse}" />
+			<br />
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

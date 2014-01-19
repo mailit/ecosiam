@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<p:dialog id="ajoutID" header="Ajout" modal="true" closable="true"
+		draggable="false" resizable="false" widgetVar="ajout">
+		<h:form id="ajoutForm" prependId="false">
+			<h:panelGrid columns="4">
+				<h:outputLabel for="libelleFiliere" value="libellé: *" />
+				<p:inputText id="libelleFiliere"
+					value="#{filiereMB.filiere.libelleFiliere}" required="true" maxlength="20"
+					label="libelle Filiere">
+					<f:validateRegex pattern="^[a-zA-Z]*[0-9]*"/>
+					<f:validateLength minimum="5" maximum="20" />
+				</p:inputText>
+				<p:watermark for="libelleFiliere" value="filiere" />
+				<p:message for="libelleFiliere" />
+
+				<h:outputLabel for="dateCreationFiliere" value="Date de création: " />
+				<p:calendar effect="fadeIn" id="dateCreationFiliere"
+					pattern="dd/MM/yyyy"
+					value="#{filiereMB.filiere.dateCreationFiliere}"
+					label="Date de début" />
+				<p:watermark for="dateCreationFiliere" value="01/01/1991" />
+				<p:message for="dateCreationFiliere" />
+
+				<h:outputLabel for="prixFormation" value="Prix : *" />
+				<p:inputText id="prixFormation"
+					value="#{filiereMB.filiere.prixFormation}" required="true"
+					label="Prix formation" >
+				<f:validateDoubleRange minimum="2000.0" maximum="5000.0"/>
+				</p:inputText>
+				<p:watermark for="prixFormation" value="XXXX.YY" />
+				<p:message for="prixFormation" />
+				
+				<h:outputLabel for="formation" value="Formation: *" />
+				<p:autoComplete id="formation" dropdown="true"
+					value="#{filiereMB.formation}" converter="#{formationConverter}"
+					completeMethod="#{filiereMB.completeFormations}" var="formation"
+					itemLabel="#{formation.libelleFormation}" itemValue="#{formation}"
+					label="formation" required="true" />
+				<p:message for="formation" />
+
+			</h:panelGrid>
+			<p:commandButton id="saveBtn" value="Ajouter" icon="ui-icon-check"
+				 style="margin:0" action="#{filiereMB.createFiliere}" />
+			<br />
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

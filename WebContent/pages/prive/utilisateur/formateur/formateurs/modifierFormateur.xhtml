@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<p:dialog id="modificationID"
+		message="#{classeMB.classe.libelleClasse}" header="Modification"
+		modal="true" closable="true" draggable="false" resizable="false"
+		widgetVar="modification">
+		<h:form id="modificationForm" prependId="false">
+			<h:panelGrid columns="4">
+				<h:outputLabel for="prenomUserm" value="Prénom: *" />
+				<p:inputText id="prenomUserm"
+					value="#{formateurMB.utilisateur.prenomUser}" required="true"
+					label="prenom" maxlength="20" validatorMessage="Prenom invalide"  >
+				<f:validateRegex pattern="^[a-z]*[A-Z]*$"/>
+				<f:validateLength minimum="3" maximum="20"/>
+				</p:inputText>
+				<p:watermark for="prenomUserm" value="prénom" />
+				<p:message for="prenomUserm" />
+
+				<h:outputLabel for="nomUserm" value="Nom: *" />
+				<p:inputText id="nomUserm"
+					value="#{formateurMB.utilisateur.nomUser}" required="true"
+					label="nom" maxlength="20" validatorMessage="Nom invalide"  >
+				<f:validateRegex pattern="^[a-z]*[A-Z]*$"/>
+				<f:validateLength minimum="3" maximum="20"/>
+				</p:inputText>
+				<p:watermark for="nomUserm" value="nom" />
+				<p:message for="nomUserm" />
+
+				<h:outputLabel for="emailUserm" value="Email: *" />
+				<p:inputText id="emailUserm"
+					value="#{formateurMB.utilisateur.emailUser}" required="true"
+					label="email" validatorMessage="L'adresse mail est invalide">
+					<f:validateRegex pattern="^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$"/>
+				</p:inputText>
+				<p:watermark for="emailUserm" value="exemple@exemple.com" />
+				<p:message for="emailUserm" />
+
+				<h:outputLabel for="telUserm" value="Tel: *" />
+				<p:inputText id="telUserm"
+					value="#{formateurMB.utilisateur.telUser}" required="true"
+					label="telephone" validatorMessage="Le numéro de telephone est invalide">
+					<f:validateRegex pattern="\+[0-9]*$"/>
+					<f:validateLength minimum="13" maximum="13"/>
+				</p:inputText>
+				<p:watermark for="telUserm" value="+212XXXXXXXXX" />
+				<p:message for="telUserm" />
+
+
+				<h:outputLabel for="dateNaissancem" value="Date de naissance: " />
+				<p:calendar effect="fadeIn" id="dateNaissancem" pattern="dd/MM/yyyy"
+					value="#{formateurMB.formateur.dateNaissance}"
+					label="Date de naissance" />
+				<p:watermark for="dateNaissancem" value="01/01/1991" />
+				<p:message for="dateNaissancem" />
+
+
+				<h:outputLabel for="ribFormateurm" value="RIB: *" />
+				<p:inputText id="ribFormateurm"
+					value="#{formateurMB.formateur.ribFormateur}" required="true"
+					label="RIB" maxlength="23" validatorMessage="Le RIB est invalide">
+					<f:validateRegex pattern="^(0[1-9]|[1-8]\d|9[0-7])$"/>
+					<f:validateLength minimum="2" maximum="2"/>
+				</p:inputText>
+				<p:watermark for="ribFormateurm" value="97" />
+				<p:message for="ribFormateurm" />
+
+			</h:panelGrid>
+			<p:commandButton id="updateBtn" value="Modifier" icon="ui-icon-check"
+				style="margin:0" action="#{formateurMB.updateFormateur()}" />
+			<br />
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+
+	<ui:insert name="header">
+		<ui:include src="/resources/includes/header.xhtml" />
+	</ui:insert>
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="90"
+			header="LogiSoft - Gestion du parc informatique" resizable="true"
+			closable="true" collapsible="true">
+			<ui:insert name="menu">
+				<ui:include src="/resources/includes/menu.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west" size="207" resizable="true"
+			closable="true" collapsible="true" header="Administration">
+			<ui:insert name="left_box">
+				<ui:include src="/resources/includes/left_box_privileges.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+		<p:layoutUnit position="south" size="30" header="Bottom"
+			resizable="true" closable="true" collapsible="true">
+			<ui:insert name="footer">
+				<ui:include src="/resources/includes/footer.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+
+		<p:layoutUnit position="center">
+			<p:panel id="pnl" header="Liste des utilisateurs"
+				style="margin-bottom:10px;">
+
+				<h:form id="form" style="width:80%;margin-top:2%;margin-left:10%">
+					<p:dataTable id="tableUtilisateur" var="s"
+						value="#{utilisateurMB.utilisateurs}" paginator="true" rows="10"
+						filteredValue="#{utilisateurMB.utilisateursFiltres}"
+						emptyMessage="Aucun enregistrement trouvé ayant ce critère"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">
+
+						<p:column headerText="Nom" style="width:20%"
+							sortBy="#{s.nomUser}"
+							filterBy="#{s.nomUser}" filterMatchMode="contains">
+							<h:outputText value="#{s.nomUser}" />
+						</p:column>
+						<p:column headerText="Prenom" style="width:20%"
+							sortBy="#{s.prenomUser}"
+							filterBy="#{s.prenomUser}" filterMatchMode="contains">
+							<h:outputText value="#{s.prenomUser}" />
+						</p:column>
+						<p:column headerText="Email" style="width:20%"
+							sortBy="#{s.emailUser}"
+							filterBy="#{s.emailUser}" filterMatchMode="contains">
+							<h:outputText value="#{s.emailUser}" />
+						</p:column>
+						<p:column headerText="Telephone" style="width:20%"
+							sortBy="#{s.telUser}"
+							filterBy="#{s.telUser}" filterMatchMode="contains">
+							<h:outputText value="#{s.telUser}" />
+						</p:column>
+						<p:column headerText="Role" style="width:20%"
+							sortBy="#{s.role.role}" filterBy="#{s.role.role}"
+							filterMatchMode="contains">
+							<h:outputText value="#{s.role.role}" />
+						</p:column>
+
+						<p:column headerText="Actions">
+							<p:spacer width="10px" />
+							<p:commandButton icon="ui-icon-trash"
+								onclick="suppression.show();" title="Icon Only">
+								<f:setPropertyActionListener value="#{s}"
+									target="#{utilisateurMB.utilisateur}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+					<br />
+					<p:commandButton icon="ui-icon-check" onclick="ajout.show();"
+						value="Ajouter un utilisateur" update=":ajoutForm">
+					</p:commandButton>
+					<p:commandButton value="Imprimer" type="button"
+						icon="ui-icon-print">
+						<p:printer target="tableUtilisateur" />
+					</p:commandButton>
+				</h:form>
+			</p:panel>
+		</p:layoutUnit>
+	</p:layout>
+
+	<ui:include src="ajouterUtilisateur.xhtml" />
+	<ui:include src="supprimerUtilisateur.xhtml" />
+
+</h:body>
+</html>

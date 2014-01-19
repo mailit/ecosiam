@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+
+	<ui:insert name="header">
+		<ui:include src="/resources/includes/header.xhtml" />
+	</ui:insert>
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="80"
+			header="Application de Gestion de l'ECOSIAM" resizable="true"
+			closable="true" collapsible="true">
+			<ui:insert name="menu">
+				<ui:include src="/resources/includes/menu.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west" size="207" resizable="true"
+			closable="true" collapsible="true" header="Stagiaires">
+			<ui:insert name="left_box">
+				<ui:include src="/resources/includes/left_box_stagiaires.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+		<p:layoutUnit position="south" size="30"
+			header="ECOSIAM - Tous droits réservés" resizable="true"
+			closable="true" collapsible="true">
+			<ui:insert name="footer">
+				<ui:include src="/resources/includes/footer.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+
+		<p:layoutUnit position="center">
+			<p:panel id="pnl" header="Liste des stagiaires"
+				style="margin-bottom:10px;border:0px">
+
+				<h:form id="form" style="width:60%;margin-top:2%;margin-left:20%">
+					<p:dataTable id="tableStagiaire" var="s"
+						value="#{stagiaireMB.stagiaires}" paginator="true" rows="10"
+						filteredValue="#{stagiaireMB.stagiairesFiltres}"
+						emptyMessage="Aucun enregistrement trouvé ayant ce critère"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">
+
+
+						<p:column headerText="Nom" style="width:15%"
+							sortBy="#{s.utilisateur.nomUser}"
+							filterBy="#{s.utilisateur.nomUser}" filterMatchMode="contains">
+							<h:outputText value="#{s.utilisateur.nomUser}" />
+						</p:column>
+						<p:column headerText="Prenom" style="width:15%"
+							sortBy="#{s.utilisateur.prenomUser}"
+							filterBy="#{s.utilisateur.prenomUser}" filterMatchMode="contains">
+							<h:outputText value="#{s.utilisateur.prenomUser}" />
+						</p:column>
+						<p:column headerText="Email" style="width:15%"
+							sortBy="#{s.utilisateur.emailUser}"
+							filterBy="#{s.utilisateur.emailUser}" filterMatchMode="contains">
+							<h:outputText value="#{s.utilisateur.emailUser}" />
+						</p:column>
+<!-- 						<p:column headerText="Telephone" style="width:10%" -->
+<!-- 							sortBy="#{s.utilisateur.telUser}" -->
+<!-- 							filterBy="#{s.utilisateur.telUser}" filterMatchMode="contains"> -->
+<!-- 							<h:outputText value="#{s.utilisateur.telUser}" /> -->
+<!-- 						</p:column> -->
+<!-- 						<p:column headerText="CNE" style="width:10%" -->
+<!-- 							sortBy="#{s.cneStagiaire}" filterBy="#{s.cneStagiaire}" -->
+<!-- 							filterMatchMode="contains"> -->
+<!-- 							<h:outputText value="#{s.cneStagiaire}" /> -->
+<!-- 						</p:column> -->
+<!-- 						<p:column headerText="Classe" style="width:10%" -->
+<!-- 							sortBy="#{s.classe.libelleClasse}" -->
+<!-- 							filterBy="#{s.classe.libelleClasse}" filterMatchMode="contains"> -->
+<!-- 							<h:outputText value="#{s.classe.libelleClasse}" /> -->
+<!-- 						</p:column> -->
+<!-- 						<p:column headerText="Date de naissance" style="width:10%" -->
+<!-- 							sortBy="#{s.dateNaissance}" filterBy="#{s.dateNaissance}" -->
+<!-- 							filterMatchMode="contains"> -->
+<!-- 							<h:outputText value="#{s.dateNaissance}"> -->
+<!-- 								<f:convertDateTime pattern="dd/MM/yyyy" /> -->
+<!-- 							</h:outputText> -->
+<!-- 						</p:column> -->
+<!-- 						<p:column headerText="date d'inscription" style="width:10%" -->
+<!-- 							sortBy="#{s.dateInscription}" filterBy="#{s.dateInscription}" -->
+<!-- 							filterMatchMode="contains"> -->
+<!-- 							<h:outputText value="#{s.dateInscription}"> -->
+<!-- 								<f:convertDateTime pattern="dd/MM/yyyy" /> -->
+<!-- 							</h:outputText> -->			
+<!-- 						</p:column> -->
+						<p:column style="width:20%">
+							<p:spacer width="10px" />
+							<p:commandButton icon="ui-icon-search" onclick="details.show();"
+								update=":detailsForm" title="Icon Only">
+								<f:setPropertyActionListener target="#{stagiaireMB.stagiaire}"
+									value="#{s}" />
+								<f:setPropertyActionListener value="#{s.utilisateur}"
+									target="#{stagiaireMB.utilisateur}" />
+							</p:commandButton>
+							<p:spacer width="10px" />
+							<p:commandButton icon="ui-icon-pencil"
+								onclick="modification.show();" update=":modificationForm"
+								title="Icon Only">
+								<f:setPropertyActionListener target="#{stagiaireMB.stagiaire}"
+									value="#{s}" />
+								<f:setPropertyActionListener value="#{s.utilisateur}"
+									target="#{stagiaireMB.utilisateur}" />
+							</p:commandButton>
+
+							<p:spacer width="10px" />
+							<p:commandButton icon="ui-icon-trash"
+								onclick="suppression.show();" title="Icon Only">
+								<f:setPropertyActionListener value="#{s}"
+									target="#{stagiaireMB.stagiaire}" />
+								<f:setPropertyActionListener value="#{s.utilisateur}"
+									target="#{stagiaireMB.utilisateur}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+					<br />
+					<p:commandButton icon="ui-icon-check" onclick="ajout.show();"
+						update=":ajoutForm" value="Ajouter un stagiaire">
+					</p:commandButton>
+				</h:form>
+			</p:panel>
+		</p:layoutUnit>
+	</p:layout>
+	<ui:include src="detailsStagiaire.xhtml" />
+	<ui:include src="ajouterStagiaire.xhtml" />
+	<ui:include src="supprimerStagiaire.xhtml" />
+	<ui:include src="modifierStagiaire.xhtml" />
+
+</h:body>
+</html>

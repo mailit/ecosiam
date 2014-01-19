@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/bluesky-1.0.10.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate-jpa-2.0-api-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate-testing.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javassist-3.12.0.GA.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsf-api-2.1.11.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsf-impl-2.1.11.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jstl-api-1.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jstl-impl-1.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jta-1.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/persistence-api-1.0.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-log4j12-1.6.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/south-street-1.0.10.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jdom-1.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/rome-0.9.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/rome-1.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/afterdark-1.0.10.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/afternoon-1.0.10.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/afterwork-1.0.10.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/black-tie-1.0.10.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/casablanca-1.0.10.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/midnight-1.0.10.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ui-lightness-1.0.10.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/alt-rt.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/charsets.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/deploy.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javaws.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jce.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jfr.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jfxrt.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsse.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/management-agent.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/plugin.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/resources.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/rt.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mysql-connector-java-5.1.6-bin.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/asm-3.3.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/cglib-2.2.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/primefaces-4.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/sqljdbc4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_21">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/java-mail-1.4.4.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

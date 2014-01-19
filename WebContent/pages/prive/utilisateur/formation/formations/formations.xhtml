@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+
+	<ui:insert name="header">
+		<ui:include src="/resources/includes/header.xhtml" />
+	</ui:insert>
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="80"
+			header="Application de Gestion de l'ECOSIAM" resizable="true"
+			closable="true" collapsible="true">
+			<ui:insert name="menu">
+				<ui:include src="/resources/includes/menu.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west" size="207" resizable="true"
+			closable="true" collapsible="true" header="Formations">
+			<ui:insert name="left_box">
+				<ui:include src="/resources/includes/left_box_formations.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+		<p:layoutUnit position="south" size="30" style="border:0px"
+			header="ECOSIAM - Tous droits réservés" resizable="true"
+			closable="true" collapsible="true">
+			<ui:insert name="footer">
+				<ui:include src="/resources/includes/footer.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+
+		<p:layoutUnit position="center">
+			<p:panel id="pnl" header="Liste des formations"
+				style="margin-bottom:10px;border:0px">
+
+				<h:form id="form" style="width:80%;margin-top:2%;margin-left:10%">
+					<p:dataTable id="tableFormation" var="s"
+						value="#{formationMB.formations}" paginator="true" rows="10"
+						filteredValue="#{formationMB.formationsFiltres}"
+						emptyMessage="Aucun enregistrement trouvé ayant ce critère"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">
+						<p:column style="width:2%">
+							<p:rowToggler />
+						</p:column>
+						<p:column headerText="Libelle" style="width:10%"
+							sortBy="#{s.libelleFormation}" filterBy="#{s.libelleFormation}"
+							filterMatchMode="contains">
+							<h:outputText value="#{s.libelleFormation}" />
+						</p:column>
+
+						<p:column headerText="Etablissement" style="width:10%"
+							sortBy="#{s.etablissement.libelleEtablissement}"
+							filterBy="#{s.etablissement.libelleEtablissement}"
+							filterMatchMode="contains">
+							<h:outputText value="#{s.etablissement.libelleEtablissement}" />
+						</p:column>
+
+						<p:column headerText="Date de création" style="width:10%"
+							sortBy="#{s.dateCreationFormation}"
+							filterBy="#{s.dateCreationFormation}" filterMatchMode="contains">
+							<h:outputText value="#{s.dateCreationFormation}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+
+						<p:rowExpansion>
+							<p:panel id="display" style="border:0px">
+
+								<p:dataList value="#{s.filiere}" var="f" itemType="disc"
+									style="border:0px">  
+						    #{f.libelleFiliere}  
+								</p:dataList>
+							</p:panel>
+
+						</p:rowExpansion>
+
+						<p:column style="width:10%">
+							<p:spacer width="10px" />
+							<p:commandButton icon="ui-icon-pencil"
+								onclick="modification.show();" update=":modificationForm"
+								title="Icon Only">
+								<f:setPropertyActionListener target="#{formationMB.formation}"
+									value="#{s}" />
+							</p:commandButton>
+
+							<p:spacer width="10px" />
+							<p:commandButton icon="ui-icon-trash"
+								onclick="suppression.show();" title="Icon Only">
+								<f:setPropertyActionListener value="#{s}"
+									target="#{formationMB.formation}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+					<br />
+					<p:commandButton icon="ui-icon-check" onclick="ajout.show();"
+						update=":ajoutForm" value="Ajouter une formation">
+					</p:commandButton>
+				</h:form>
+			</p:panel>
+		</p:layoutUnit>
+	</p:layout>
+
+	<ui:include src="ajouterFormation.xhtml" />
+	<ui:include src="supprimerFormation.xhtml" />
+	<ui:include src="modifierFormation.xhtml" />
+
+</h:body>
+</html>

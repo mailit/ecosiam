@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<p:dialog id="ajoutID" header="Ajout" modal="true" closable="true"
+		draggable="false" resizable="false" widgetVar="ajout">
+		<h:form id="ajoutForm" prependId="false">
+			<h:panelGrid columns="4">
+				<h:outputLabel for="libelleFormation" value="Libellé : *" />
+				<p:inputText id="libelleFormation"
+					value="#{formationMB.formation.libelleFormation}" required="true" maxlength="20"
+					label="libelle Formation"> 
+					<f:validateRegex pattern="^[a-zA-Z]*"/>
+					<f:validateLength minimum="5" maximum="20" />
+				</p:inputText>
+				<p:watermark for="libelleFormation" value="formation" />
+				<p:message for="libelleFormation" />
+
+				<h:outputLabel for="dateCreationFormation"
+					value="Date de création: " />
+				<p:calendar effect="fadeIn" id="dateCreationFormation"
+					pattern="dd/MM/yyyy"
+					value="#{formationMB.formation.dateCreationFormation}"
+					label="Date de création" />
+				<p:watermark for="dateCreationFormation" value="01/01/1991" />
+				<p:message for="dateCreationFormation" />
+
+				<h:outputLabel for="etablissement" value="Etablissement: *" />
+				<p:autoComplete id="etablissement" dropdown="true"
+					value="#{formationMB.etablissement}"
+					converter="#{etablissementConverter}"
+					completeMethod="#{formationMB.completeEtablissements}"
+					var="etablissement"
+					itemLabel="#{etablissement.libelleEtablissement}"
+					itemValue="#{etablissement}" label="Etablissement" required="true" />
+				<p:message for="etablissement" />
+
+			</h:panelGrid>
+			<p:commandButton id="saveBtn" value="Ajouter !" icon="ui-icon-check"
+				 style="margin:0"
+				action="#{formationMB.createFormation}" />
+			<br />
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

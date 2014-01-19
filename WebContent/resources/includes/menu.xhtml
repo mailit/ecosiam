@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<h:form>
+		<p:growl id="messages" />
+		<p:menubar autoDisplay="false" style="border:0px">
+
+			<p:menuitem value="Formations" icon="ui-icon-document"
+				url="/pages/prive/utilisateur/formation/formations/formations.xhtml" />
+
+			<p:menuitem value="Plannings" icon="ui-icon-contact"
+				url="/pages/prive/utilisateur/planning/plannings/plannings.xhtml" />
+
+			<p:menuitem value="Stagiaires" icon="ui-icon-person"
+				url="/pages/prive/utilisateur/stagiaire/stagiaires/stagiaires.xhtml" />
+
+			<p:menuitem value="Formateurs" icon="ui-icon-person"
+				url="/pages/prive/utilisateur/formateur/formateurs/formateurs.xhtml" />
+
+			<p:menuitem value="Paiements" icon="ui-icon-link"
+				url="/pages/prive/admin/paiements/paiements.xhtml" />
+
+			<p:menuitem value="Pieces Administratives" icon="ui-icon-document"
+				url="/pages/prive/admin/pas/pas.xhtml" />
+			<p:menuitem value="Utilisateurs" icon="ui-icon-person"
+				url="/pages/prive/admin/privileges/utilisateurs/utilisateurs.xhtml" />
+
+			<p:menuitem value="Profil" icon="ui-icon-gear"
+				url="/pages/prive/utilisateur/profil/motDePasse.xhtml" />
+
+			<f:facet name="options">
+				<h:outputLabel value="Bienvenue #{authentificationMB.loginUser}" />
+				<p:commandButton value="Se deconnecter" icon="ui-icon-extlink"
+					action="#{authentificationMB.deconnecter}" />
+
+			</f:facet>
+		</p:menubar>
+	</h:form>
+</h:body>
+</html>
